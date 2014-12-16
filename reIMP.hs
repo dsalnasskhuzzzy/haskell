@@ -39,6 +39,10 @@ take' :: (Integral a) => a -> [b] -> [b]
 take' 0 (_) = []
 take' n (a:b) = a:(take' (n-1) b)
 
+drop' :: (Integral a) => a -> [b] -> [b]
+drop' 0 (a) = a
+drop' n (_:a) = drop' (n-1) a 
+
 last' :: [a] -> a
 last' [] = error "empty list"
 last' (a:[]) = a
@@ -48,3 +52,8 @@ init' :: [a] -> [a]
 init' [] = error "empty list"
 init' (a:[]) = [] 
 init' (a:b) = a : init' b
+
+zip' :: [a] -> [b] -> [(a,b)]
+zip' ([]) (_) = []
+zip' (_) ([]) = []
+zip' (a:c) (b:e) = (a,b) : (zip' c e)
