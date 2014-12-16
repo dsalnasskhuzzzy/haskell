@@ -17,9 +17,11 @@ prev' :: (Num a) => a -> a
 prev' a = a - 1
 
 head' :: [a] -> a
+head' [] = error "empty list"
 head' (a:_) = a
 
 tail' :: [a] -> [a]
+tail' [] = error "empty list"
 tail' (_:a) = a
 
 length' :: [a] -> Int 
@@ -28,3 +30,21 @@ length' a = sum' [1|_<-a]
 sum' :: (Num a) => [a] -> a 
 sum' [] = 0
 sum' (a:b) = a + sum' b
+
+product' :: (Num a) => [a] -> a
+product' [] = 1
+product' (a:b) = a * product' b
+
+take' :: (Integral a) => a -> [b] -> [b]
+take' 0 (_) = []
+take' n (a:b) = a:(take' (n-1) b)
+
+last' :: [a] -> a
+last' [] = error "empty list"
+last' (a:[]) = a
+last' (_:b) = last' b
+
+init' :: [a] -> [a]
+init' [] = error "empty list"
+init' (a:[]) = [] 
+init' (a:b) = a : init' b
