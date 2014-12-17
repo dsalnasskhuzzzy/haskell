@@ -57,3 +57,23 @@ zip' :: [a] -> [b] -> [(a,b)]
 zip' ([]) (_) = []
 zip' (_) ([]) = []
 zip' (a:c) (b:e) = (a,b) : (zip' c e)
+
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith' _ [] _ = []
+zipWith' _ _ [] = []
+zipWith' f (x:xs) (y:ys) = (f x y) : (zipWith' f xs ys)
+
+flip' :: (a -> b -> c) -> b -> a -> c
+flip' f x y = f y x
+
+map' :: (a -> b) -> [a] -> [b]
+map' _ [] = []
+map' f (x:xs) = (f x) : (map' f xs)
+
+foldl' :: (a -> b -> a) -> a -> [b] -> a
+foldl' f accu (x:[]) = f accu x
+foldl' f accu (x:xs) = foldl' f (f accu x) xs
+
+foldr' :: (a -> b -> a) -> a -> [b] -> a
+foldr' f accu (x:[]) = f accu x
+foldr' f accu xs = foldr' f (f accu (last' xs)) (init xs)
